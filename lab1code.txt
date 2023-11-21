@@ -1,0 +1,41 @@
+
+///////////Part 1 code/////////////////////
+
+module partA(SW3,SW2,SW1, LED0, LED1)
+	input SW3, SW2, SW1, SW0;
+	output LED0, LED1;
+	
+	wire a;
+	wire b;
+	wire c;
+
+	nand g1(a, SW2, SW1);
+	and g2(b, a, SW3);
+	nand g3(c, SW1, SW0);
+	nor g4(LED0, b, c);
+	not g5(LED1, c);
+endmodule
+
+
+
+///////////Part 2 code/////////////////////
+
+
+module partB(SW3, SW2, SW1, SW0, LEDR2, LEDR1, LEDR0)
+	input SW3, SW2, SW1, SW0;
+	output LEDR2, LEDR1, LEDR0;
+	
+	wire a;
+	wire b;
+	wire c;
+	wire d;
+
+	and g1(a, SW3, SW1);
+	xor g2(b, SW3, SW1);
+	and g3(c, SW2, SW0);
+	xor g4(LEDR0, SW2, SW0);
+
+	and g5(d, c, b);
+	xor g6(ledr1, b, c);
+	or g7(ledr2, a, d);
+endmodule
