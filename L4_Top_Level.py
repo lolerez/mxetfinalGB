@@ -22,7 +22,7 @@ h = 0  # similar counter for rotaion but for relocation
 # Import external programs
 import time         # keeping time
 import numpy as np  # for handling matrices
-
+from time import sleep
 # Import internal programs (these are on the scuttle github)
 import L2_track_target as track
 import L2_speed_control as sc
@@ -69,7 +69,7 @@ def handleRotation(): # should rotate 45 degrees, need to calculate proper theta
     print("Rotated!" )
 
 
-def movementCommand(xdot,thetadot,time) # move the robot xdot, thetadot, and the time to do those commands
+def movementCommand(xdot,thetadot,time): # move the robot xdot, thetadot, and the time to do those commands
     B = np.array([xdot, thetadot]) # make  inputs into an array
     phis = inv.getPdTargets(B)
     sc.driveOpenLoop(phis)
@@ -78,7 +78,7 @@ def movementCommand(xdot,thetadot,time) # move the robot xdot, thetadot, and the
     print("Movement!" )
 
 
-def relocation()
+def relocation():
     # relocation away to another spot after doing rotations
     movementCommand(2.5,0,1) # move the robot 2.5 m/s forward randomly for a second
 
@@ -125,12 +125,12 @@ def closestobject():
     else:
         return False
 
-def turnoffmotor() # code to turn off main motor
+def turnoffmotor(): # code to turn off main motor
 
-def turnonmotor() # code to turn on main motor
+def turnonmotor(): # code to turn on main motor
 
 
-def avoidobject()
+def avoidobject();
     # code to check the side ultrasonics and move based on the feedback
     # this is the main avoid object, it should restart its search or return home after this
 
@@ -157,16 +157,16 @@ def look_for_balls():
                 # Run scanObject again if relocation is not called 3 times
                 continue
         if observe == 2 : # if detected an object nearby
-
+            avoidobject()
 
 
 
 
 # THIS SECTION ONLY RUNS IF THE PROGRAM IS CALLED DIRECTLY, THIS SHOULD BE THE MAIN AUTONOMOUS PROGRAM
 if __name__ == "__main__":
-    
-    look_for_balls() # look for balls part of the program, which includes scanning, rotating, and relocating. Breaks from program after it doesnt find balls and must go home
-    gohome() # goes home if it does not find any balls
+    movementCommand(2.5 , 0 , 1)
+   # look_for_balls() # look for balls part of the program, which includes scanning, rotating, and relocating. Breaks from program after it doesnt find balls and must go home
+   # gohome() # goes home if it does not find any balls
     
 
 
