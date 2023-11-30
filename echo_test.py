@@ -1,9 +1,9 @@
 from gpiozero import DistanceSensor
 from time import sleep
-import L1_motor as drive
 
-sensor = DistanceSensor(echo=25, trigger=24)
 
+sensorl = DistanceSensor(echo=25, trigger=24)
+sensorr = DistanceSensor(echo=16, trigger=26)
 while True:
     print("Distance", sensor.distance *100)
     drive.sendLeft(0.8)
